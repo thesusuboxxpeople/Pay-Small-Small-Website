@@ -31,6 +31,7 @@ yarn-error.log*
 .pnpm-debug.log*
 dev-server*.log
 production-server.log
+forge-production-test.log
 
 # env files (can opt-in for committing if needed)
 .env*
