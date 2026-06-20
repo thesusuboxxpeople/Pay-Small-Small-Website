@@ -14,8 +14,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Paysmallsmall - Shop Products & Services Online",
+  metadataBase: new URL("https://paysmallsmall.app"),
+  title: {
+    default: "Paysmallsmall - Shop Products & Services Online",
+    template: "%s | Paysmallsmall",
+  },
   description: "Your trusted e-commerce platform. Shop products, find services, and get great deals with flexible payment options.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_GH",
+    url: "/",
+    siteName: "Paysmallsmall",
+    title: "Paysmallsmall - Shop Products & Services Online",
+    description: "Shop products and services with secure, flexible payment options in Ghana.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Paysmallsmall - Shop Products & Services Online",
+    description: "Shop products and services with secure, flexible payment options in Ghana.",
+  },
 };
 
 export default function RootLayout({

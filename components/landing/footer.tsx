@@ -5,7 +5,6 @@
  import { Mail, Phone, MapPin } from "lucide-react";
  
 export function Footer() {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   return (
     <footer className="relative bg-linear-to-br from-gray-50 via-white to-gray-50 pt-16 sm:pt-20 pb-8 border-t-2 border-gray-200 overflow-hidden">
       {/* Background decoration */}
@@ -21,7 +20,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-5 sm:mb-6">
               <Image
-                src={`${basePath}/logo.png`}
+                src="/logo.png"
                 alt="Paysmallsmall logo"
                 width={160}
                 height={40}
@@ -67,30 +66,30 @@ export function Footer() {
 
           {/* Resources Section */}
           <div>
-            <h4 className="font-bold text-gray-900 mb-5 sm:mb-6 text-base sm:text-lg">Resources</h4>
+            <h4 className="font-bold text-gray-900 mb-5 sm:mb-6 text-base sm:text-lg">Founder&apos;s Club</h4>
             <ul className="space-y-3.5 sm:space-y-4">
               <li>
-                <a href="#" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
+                <Link href="/founders-club" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#27255f]/30 group-hover:bg-[#27255f] transition-colors"></span>
-                  Help Center
-                </a>
+                  Program Details
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
+                <Link href="/founders-club#packages" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#27255f]/30 group-hover:bg-[#27255f] transition-colors"></span>
-                  Terms of Service
-                </a>
+                  App Packages
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
+                <Link href="/founders-club#application" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#27255f]/30 group-hover:bg-[#27255f] transition-colors"></span>
-                  Privacy Policy
-                </a>
+                  Apply to Join
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
+                <a href="mailto:support@paysmallsmall.app" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#27255f]/30 group-hover:bg-[#27255f] transition-colors"></span>
-                  Safety Guides
+                  Contact Support
                 </a>
               </li>
             </ul>

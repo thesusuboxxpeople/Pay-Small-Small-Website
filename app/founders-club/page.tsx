@@ -7,59 +7,107 @@ import { Footer } from "@/components/landing/footer";
 import { ApplicationForm } from "@/components/founders-club/application-form";
 
 export const metadata: Metadata = {
-  title: "Founder's Club | Paysmallsmall",
+  title: "Founder's Club",
   description: "Join the Paysmallsmall Founder's Club and build the digital infrastructure your business needs to grow.",
+  alternates: {
+    canonical: "/founders-club/",
+  },
+  openGraph: {
+    url: "/founders-club/",
+    title: "The Founder's Club | Paysmallsmall",
+    description: "Apply for startup-friendly mobile app development and digital infrastructure services in Ghana.",
+  },
 };
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const packages = [
   {
     title: "E-Commerce App",
     audience: "Manufacturers, retailers, pharmacies, fashion brands and supermarkets",
     price: "GHS 18,000 - 25,000",
-    image: `${basePath}/founders-club/ecommerce-app.jpg`,
-    items: ["AI-powered search and filtering", "Localized payments and checkout", "Live delivery tracking"],
+    image: "/founders-club/ecommerce-app.jpg",
+    items: [
+      "Frictionless customer onboarding",
+      "AI-powered search and dynamic filtering",
+      "Optimized cart and checkout",
+      "Localized, flexible payment gateways",
+      "Retention tools and personalized rewards",
+      "Live order milestone tracking",
+      "Native push notifications",
+    ],
     icon: ShoppingCart,
   },
   {
     title: "Personal Brand App",
     audience: "Entrepreneurs, athletes, consultants, educators, public figures and creators",
     price: "GHS 10,000 - 22,000",
-    image: `${basePath}/founders-club/personal-brand-app.png`,
-    items: ["Curated content and notifications", "Bookings and subscriptions", "Private community features"],
+    image: "/founders-club/personal-brand-app.png",
+    items: [
+      "Direct native push notifications",
+      "Curated multimedia content feed",
+      "Integrated appointment booking",
+      "Membership and content payments",
+      "Private community wall",
+    ],
     icon: UserRound,
   },
   {
     title: "Ride-Hailing & Logistics",
     audience: "Fleet owners, courier services, independent drivers and logistics providers",
     price: "GHS 30,000 - 45,000",
-    image: `${basePath}/founders-club/ride-hailing-app.png`,
-    items: ["GPS and smart dispatching", "Fleet dashboards and route optimization", "Split payments and safety tools"],
+    image: "/founders-club/ride-hailing-app.png",
+    items: [
+      "Real-time GPS and smart dispatching",
+      "Dynamic pricing and fare estimates",
+      "Driver and fleet management dashboard",
+      "Multi-stop route optimization",
+      "In-app wallet and split payments",
+      "Live trip sharing and safety tools",
+    ],
     icon: Truck,
   },
   {
     title: "Health & Wellness App",
     audience: "Gyms, spas, nutritionists, wellness providers and fitness consultants",
     price: "GHS 15,000 - 25,000",
-    image: `${basePath}/founders-club/health-wellness-app.png`,
-    items: ["Routine and meal-plan builders", "Streaming and wearable integration", "Bookings and progress tracking"],
+    image: "/founders-club/health-wellness-app.png",
+    items: [
+      "Custom routines and goal builders",
+      "Dietary and meal-tracking analytics",
+      "Live streaming and video library",
+      "Wearable device integration",
+      "Appointments and telehealth",
+      "Progress journals and milestones",
+    ],
     icon: Dumbbell,
   },
   {
     title: "Restaurant App",
     audience: "Restaurants, cloud kitchens, quick-service chains and gourmet eateries",
     price: "GHS 15,000 - 25,000",
-    image: `${basePath}/founders-club/restaurant-app.png`,
-    items: ["Digital menus and QR ordering", "Delivery, pickup and table booking", "Kitchen and loyalty systems"],
+    image: "/founders-club/restaurant-app.png",
+    items: [
+      "Interactive menus and customizations",
+      "QR ordering and table booking",
+      "Delivery and pickup management",
+      "Kitchen display system integration",
+      "Loyalty points and gift cards",
+      "Automated upselling and combo offers",
+    ],
     icon: Store,
   },
   {
     title: "Schools & Organizations",
     audience: "Schools, universities, academies, unions, associations and community groups",
     price: "GHS 22,000 - 40,000",
-    image: `${basePath}/founders-club/organizations-app.jpg`,
-    items: ["Notices and fee collection", "Attendance and learning resources", "Member messaging and events"],
+    image: "/founders-club/organizations-app.jpg",
+    items: [
+      "Noticeboard and push announcements",
+      "Automated fee collection and e-receipts",
+      "Digital attendance and roll call",
+      "Learning and resource management",
+      "Direct member-to-admin messaging",
+      "Event calendar and RSVP management",
+    ],
     icon: GraduationCap,
   },
 ];
@@ -69,6 +117,15 @@ const onboarding = [
   ["02", "Discovery & Architecture", "A technical workshop maps data, integrations, operational flows and visual identity."],
   ["03", "Compliance & Legal", "We guide business, data protection, domain verification and IP requirements."],
   ["04", "Contract & Financing", "The SLA is signed and development begins after the first milestone payment."],
+];
+
+const sprints = [
+  ["Weeks 1-2", "Architecture & UI/UX", "Figma prototypes, data schemas and system architecture."],
+  ["Weeks 3-4", "Backend Foundation", "Database setup, authentication and primary API routes."],
+  ["Weeks 5-6", "Frontend Development", "Core user interfaces, state management and key features."],
+  ["Weeks 7-8", "Service Integrations", "Payment gateways, third-party APIs and location services."],
+  ["Weeks 9-10", "Quality Assurance", "Testing, security checks and closed beta releases."],
+  ["Weeks 11-12", "Launch & Handover", "Production deployment, repository handover and maintenance transition."],
 ];
 
 export default function FoundersClubPage() {
@@ -177,11 +234,29 @@ export default function FoundersClubPage() {
               </article>
             ))}
           </div>
+          <div className="mt-14">
+            <div className="mb-8 text-center">
+              <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[#27255f]">12-week delivery plan</p>
+              <h3 className="text-2xl font-bold text-gray-900 sm:text-3xl">Six focused development sprints</h3>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {sprints.map(([timeline, title, description]) => (
+                <article key={timeline} className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                  <p className="text-sm font-bold text-[#27255f]">{timeline}</p>
+                  <h4 className="mt-2 font-bold text-gray-900">{title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
           <div className="mt-8 grid gap-5 rounded-3xl bg-[#27255f] p-7 text-white sm:grid-cols-3 sm:p-9">
             <div><p className="text-2xl font-bold text-[#ece825]">12 weeks</p><p className="mt-1 text-sm text-white/70">Structured six-sprint delivery plan</p></div>
             <div><p className="text-2xl font-bold text-[#ece825]">50 / 30 / 20</p><p className="mt-1 text-sm text-white/70">Deposit, beta delivery and launch milestones</p></div>
             <div><p className="text-2xl font-bold text-[#ece825]">GHS 1,000</p><p className="mt-1 text-sm text-white/70">Monthly maintenance package after launch</p></div>
           </div>
+          <p className="mt-4 text-center text-sm leading-relaxed text-gray-500">
+            The maintenance package covers hosting, up to 20 GB of database storage, daily backups, SSL maintenance, security monitoring and critical bug fixes. New features and major redesigns are quoted separately.
+          </p>
         </div>
       </section>
 

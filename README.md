@@ -19,4 +19,13 @@ npm run build
 npm audit
 ```
 
-Pushes to `main` automatically deploy the static site to GitHub Pages.
+## Laravel Forge deployment
+
+The production build is exported to `out/` for Nginx to serve directly. Configure the Forge site's web directory as `/out` and use:
+
+```bash
+cd /home/forge/YOUR-SITE-DIRECTORY
+git pull origin main
+npm ci
+npm run check
+```

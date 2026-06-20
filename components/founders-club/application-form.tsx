@@ -27,12 +27,12 @@ const initialApplication: Application = {
 };
 
 const fields = [
-  { name: "fullName", label: "Full Name", type: "text", icon: User },
-  { name: "businessName", label: "Business Name", type: "text", icon: Building2 },
-  { name: "businessLocation", label: "Business Location", type: "text", icon: MapPin },
-  { name: "email", label: "Email Address", type: "email", icon: Mail },
-  { name: "whatsappContact", label: "WhatsApp Contact", type: "tel", icon: Phone },
-  { name: "callNumber", label: "Call Number", type: "tel", icon: Phone },
+  { name: "fullName", label: "Full Name", type: "text", autoComplete: "name", placeholder: "Your full name", icon: User },
+  { name: "businessName", label: "Business Name", type: "text", autoComplete: "organization", placeholder: "Your business name", icon: Building2 },
+  { name: "businessLocation", label: "Business Location", type: "text", autoComplete: "street-address", placeholder: "Town, city or region", icon: MapPin },
+  { name: "email", label: "Email Address", type: "email", autoComplete: "email", placeholder: "name@example.com", icon: Mail },
+  { name: "whatsappContact", label: "WhatsApp Contact", type: "tel", autoComplete: "tel", placeholder: "024 993 9025", icon: Phone },
+  { name: "callNumber", label: "Call Number", type: "tel", autoComplete: "tel", placeholder: "024 993 9025", icon: Phone },
 ] as const;
 
 export function ApplicationForm() {
@@ -59,27 +59,27 @@ export function ApplicationForm() {
       application.businessDetails,
     ].join("\n");
 
-    window.open(
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.location.assign(whatsappUrl);
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid gap-5 md:grid-cols-2">
-        {fields.map(({ name, label, type, icon: Icon }) => (
+        {fields.map(({ name, label, type, autoComplete, placeholder, icon: Icon }) => (
           <label key={name} className="block">
             <span className="mb-2 block text-sm font-semibold text-gray-700">
-              {label} <span className="text-red-500">*</span>
+              {label} <span aria-hidden="true" className="text-red-500">*</span>
             </span>
             <span className="relative block">
-              <Icon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+              <Icon aria-hidden="true" className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
               <input
                 required
                 name={name}
                 type={type}
+                autoComplete={autoComplete}
+                placeholder={placeholder}
+                {...(type === "tel" ? { inputMode: "tel" as const, pattern: "[+0-9 ()-]{10,20}", title: "Enter a valid phone number" } : {})}
                 value={application[name]}
                 onChange={(event) => updateField(name, event.target.value)}
                 className="h-14 w-full rounded-2xl border-2 border-gray-200 bg-white pl-12 pr-4 text-gray-900 outline-none transition-colors focus:border-[#27255f]"
@@ -91,12 +91,14 @@ export function ApplicationForm() {
 
       <label className="block">
         <span className="mb-2 block text-sm font-semibold text-gray-700">
-          Tell us about your business and why it needs our Digital Infrastructure Services. <span className="text-red-500">*</span>
+          Tell us about your business and why it needs our Digital Infrastructure Services. <span aria-hidden="true" className="text-red-500">*</span>
         </span>
         <textarea
           required
           name="businessDetails"
           rows={6}
+          minLength={30}
+          placeholder="Describe what your business does, its current challenges and the digital support it needs."
           value={application.businessDetails}
           onChange={(event) => updateField("businessDetails", event.target.value)}
           className="w-full resize-y rounded-2xl border-2 border-gray-200 bg-white p-4 text-gray-900 outline-none transition-colors focus:border-[#27255f]"

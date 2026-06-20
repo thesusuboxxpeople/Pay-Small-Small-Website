@@ -10,7 +10,6 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -63,12 +62,12 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src={`${basePath}/logo.png`}
+                src="/logo.png"
                 alt="Paysmallsmall logo"
-                width={1000}
-                height={1000}
+                width={160}
+                height={40}
                 priority
-                className=" w-auto"
+                className="h-8 w-auto sm:h-10"
               />
             </Link>
 
@@ -82,14 +81,14 @@ export function Navbar() {
               ].map((item) => {
                 const href = `/#${item.id}`;
                 return (
-                  <a
+                  <Link
                     key={item.id}
                     href={href}
                     onClick={(e) => handleNavClick(e, href)}
                     className="text-sm font-medium text-gray-600 hover:text-[#27255f] transition-colors cursor-pointer"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 );
               })}
               <Link
@@ -124,6 +123,9 @@ export function Navbar() {
 
             {/* Mobile Menu Toggle */}
             <button
+              type="button"
+              aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileOpen}
               className="md:hidden p-2 text-gray-600"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
             >
@@ -150,14 +152,14 @@ export function Navbar() {
             ].map((item) => {
               const href = `/#${item.id}`;
               return (
-                <a
+                <Link
                   key={item.id}
                   href={href}
                   onClick={(e) => handleNavClick(e, href)}
                   className="text-xl sm:text-2xl font-bold text-gray-900 cursor-pointer"
                 >
                   {item.label}
-                </a>
+                </Link>
               );
             })}
             <Link
