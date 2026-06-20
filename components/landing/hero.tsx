@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Star, Shield, Users, Wallet, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { PLAY_STORE_URL } from "@/lib/links";
 
 export function Hero() {
   return (
@@ -88,7 +89,7 @@ export function Hero() {
                 <Button 
                   size="lg" 
                   variant="outline"
-                  onClick={() => toast.info("Coming soon")}
+                  onClick={() => window.open(PLAY_STORE_URL, "_blank", "noopener,noreferrer")}
                   className="flex-1 sm:flex-none hover:scale-105 transition-transform flex items-center justify-center gap-2"
                 >
                   <Smartphone className="w-5 h-5" />

@@ -8,6 +8,7 @@ import { Menu, X, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { PLAY_STORE_URL } from "@/lib/links";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -113,7 +114,7 @@ export function Navbar() {
               <Button 
                 size="sm" 
                 variant="outline"
-                onClick={() => toast.info("Coming soon")}
+                onClick={() => window.open(PLAY_STORE_URL, "_blank", "noopener,noreferrer")}
                 className="flex items-center gap-2"
               >
                 <Smartphone className="w-4 h-4" />
@@ -188,7 +189,7 @@ export function Navbar() {
               variant="outline"
               onClick={() => {
                 setIsMobileOpen(false);
-                toast.info("Coming soon");
+                window.open(PLAY_STORE_URL, "_blank", "noopener,noreferrer");
               }}
             >
               <Smartphone className="mr-2 w-5 h-5" />
