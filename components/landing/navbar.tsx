@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { Menu, X, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BrandMark } from "@/components/ui/brand-mark";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { PLAY_STORE_URL } from "@/lib/links";
@@ -61,15 +61,8 @@ export function Navbar() {
             )}
           >
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/logo.png"
-                alt="Paysmallsmall logo"
-                width={160}
-                height={40}
-                priority
-                className="h-8 w-auto sm:h-10"
-              />
+            <Link href="/" aria-label="Paysmallsmall home">
+              <BrandMark />
             </Link>
 
             {/* Desktop Nav */}

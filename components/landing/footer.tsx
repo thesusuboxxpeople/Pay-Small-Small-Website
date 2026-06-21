@@ -1,8 +1,8 @@
  "use client";
  
- import Image from "next/image";
  import Link from "next/link";
  import { Mail, Phone, MapPin } from "lucide-react";
+ import { BrandMark } from "@/components/ui/brand-mark";
  
 export function Footer() {
   return (
@@ -19,13 +19,7 @@ export function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-5 sm:mb-6">
-              <Image
-                src="/logo.png"
-                alt="Paysmallsmall logo"
-                width={160}
-                height={40}
-                className="h-8 sm:h-10 w-auto"
-              />
+              <BrandMark markClassName="h-11 w-11" />
             </div>
             <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md leading-relaxed">
               Your trusted e-commerce platform. Shop products, find services, and enjoy secure shopping with Paysmallsmall&apos;s flexible payment options.

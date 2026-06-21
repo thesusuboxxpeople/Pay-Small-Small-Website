@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, CheckCircle2, Clock3, Crown, DatabaseBackup, Dumbbell, FileText, GraduationCap, LockKeyhole, MessageSquare, ShieldCheck, ShoppingCart, Sparkles, Store, Truck, UserRound, Users, WalletCards } from "lucide-react";
+import { ArrowDown, CheckCircle2, Clock3, DatabaseBackup, Dumbbell, FileText, GraduationCap, LockKeyhole, MessageSquare, ShieldCheck, ShoppingCart, Sparkles, Store, Truck, UserRound, Users, WalletCards } from "lucide-react";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { ApplicationForm } from "@/components/founders-club/application-form";
+import { BrandMark } from "@/components/ui/brand-mark";
 
 export const metadata: Metadata = {
   title: "Founder's Club",
@@ -197,9 +198,12 @@ export default function FoundersClubPage() {
         <div className="absolute -left-32 top-10 h-80 w-80 rounded-full bg-[#27255f]/10 blur-3xl" />
         <div className="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#ece825]/20 blur-3xl" />
         <div className="container relative z-10 mx-auto max-w-5xl text-center">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#27255f] shadow-xl shadow-[#27255f]/20">
-            <Crown className="h-8 w-8 text-[#ece825]" />
-          </div>
+          <BrandMark
+            showName={false}
+            className="mb-6"
+            markClassName="h-16 w-16 rounded-2xl shadow-xl"
+            iconClassName="h-8 w-8"
+          />
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.24em] text-[#27255f]">Paysmallsmall presents</p>
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
             The Founder&apos;s Club
