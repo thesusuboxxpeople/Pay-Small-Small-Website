@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, HeartHandshake, Wallet, Clock, Users, CheckCircle2, Star } from "lucide-react";
+import { ShieldCheck, Zap, HeartHandshake, Wallet, Clock, Users, CheckCircle2 } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 
 const features = [
@@ -22,14 +22,14 @@ const features = [
   {
     icon: Zap,
     title: "Fast Delivery",
-    description: "Get your orders delivered quickly. Browse thousands of products and services, all available on Paysmallsmall.",
+    description: "Get your orders delivered quickly. Browse products and services available on Paysmallsmall.",
     color: "bg-orange-100 text-orange-600",
     gradient: "from-orange-50 to-amber-50",
   },
   {
     icon: HeartHandshake,
-    title: "Quality Guarantee",
-    description: "Not satisfied? Our customer support team ensures you get quality products and services or your money back.",
+    title: "Customer Support",
+    description: "Need help with a product or service? Contact our support team with your order details.",
     color: "bg-pink-100 text-pink-600",
     gradient: "from-pink-50 to-rose-50",
   },
@@ -43,17 +43,17 @@ const features = [
   {
     icon: Users,
     title: "Trusted Community",
-    description: "Join thousands of satisfied customers. Read reviews, check ratings, and shop with confidence.",
+    description: "Explore sellers and service providers, and review listing details before you choose.",
     color: "bg-cyan-100 text-cyan-600",
     gradient: "from-cyan-50 to-blue-50",
   },
 ];
 
 const stats = [
-  { value: "10k+", label: "Products Available", icon: Star },
-  { value: "98%", label: "Satisfaction Rate", icon: CheckCircle2 },
-  { value: "500+", label: "New Items Monthly", icon: Zap },
-  { value: "Always", label: "Customer Support", icon: Clock },
+  { value: "Browse", label: "Products & Services", icon: Users },
+  { value: "Choose", label: "Your Payment Plan", icon: Wallet },
+  { value: "Track", label: "Your Orders", icon: Zap },
+  { value: "Connect", label: "With Support", icon: HeartHandshake },
 ];
 
 export function Features() {
@@ -124,10 +124,10 @@ export function Features() {
         >
           <div className="text-center mb-8">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3 px-4 sm:px-0">
-              Trusted by Thousands
+              Built around your everyday needs
             </h3>
             <p className="text-sm sm:text-base text-white/80 px-4 sm:px-0">
-              Join our growing community of satisfied customers
+              Explore products, compare options and find a payment plan that works for you
             </p>
           </div>
           

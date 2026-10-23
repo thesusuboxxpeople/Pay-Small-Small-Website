@@ -1,0 +1,21 @@
+# Forge deployment script for paysmallsmall.app (site 3002037)
+# These macros are interpreted by Forge; this is not a standalone shell script.
+
+set -e
+
+$CREATE_RELEASE()
+
+cd "$FORGE_RELEASE_DIRECTORY"
+
+npm ci --include=dev
+npm run check
+
+$ACTIVATE_RELEASE()
+
+pm2 startOrReload /home/forge/.pm2-conf/site-3002037.json --update-env
+
+SMOKE_BASE_URL=http://127.0.0.1:3001 npm run smoke
+
+pm2 save
+
+# A failed post-activation check does not automatically roll back the release.

@@ -8,7 +8,7 @@ const steps = [
   {
     icon: Search,
     title: "Browse & Search",
-    description: "Explore thousands of products and services. Filter by category, price, and ratings.",
+    description: "Explore products and services. Filter by category, price, and ratings.",
     color: "bg-blue-100 text-blue-600",
     step: "1",
   },

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import Link from "next/link";
 import { Menu, X, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/ui/brand-mark";
-import { toast } from "sonner";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { PLAY_STORE_URL } from "@/lib/links";
 
@@ -14,6 +14,36 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const { scrollY } = useScroll();
+  const pathname = usePathname();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const toggle = toggleRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    menuRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    const wide = window.matchMedia("(min-width: 1280px)");
+    const closeOnWideScreen = () => { if (wide.matches) setIsMobileOpen(false); };
+    const keyboard = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setIsMobileOpen(false); return; }
+      if (event.key !== "Tab") return;
+      const controls = menuRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+      if (!controls?.length) return;
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", keyboard);
+    wide.addEventListener("change", closeOnWideScreen);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", keyboard);
+      wide.removeEventListener("change", closeOnWideScreen);
+      toggle?.focus();
+    };
+  }, [isMobileOpen]);
 
   useEffect(() => {
     const unsubscribe = scrollY.on("change", (latest) => {
@@ -27,7 +57,7 @@ export function Navbar() {
     if (!targetId) return;
     const element = document.getElementById(targetId);
 
-    if (element) {
+    if (element && pathname === href.split("#")[0]) {
       e.preventDefault();
       const headerHeight = 80; // Account for fixed header
       const elementPosition = element.getBoundingClientRect().top;
@@ -35,7 +65,7 @@ export function Navbar() {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
       });
     }
     
@@ -66,7 +96,7 @@ export function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav aria-label="Main navigation" className="hidden xl:flex items-center gap-5">
               {[
                 { label: "Features", id: "features" },
                 { label: "How it Works", id: "how-it-works" },
@@ -86,23 +116,24 @@ export function Navbar() {
                 );
               })}
               <Link
-                href="/founders-club"
+                href="/founders-club" aria-current={pathname === "/founders-club" ? "page" : undefined}
                 className="text-sm font-semibold text-[#27255f] hover:text-[#1f1d4a] transition-colors"
               >
                 Founder&apos;s Club
               </Link>
+              <Link href="/builders-club" aria-current={pathname === "/builders-club" ? "page" : undefined} className="text-sm font-semibold text-[#27255f] hover:text-[#1f1d4a]">Builders Club</Link>
             </nav>
 
             {/* CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden xl:flex items-center gap-3">
               <Button 
                 size="sm" 
                 variant="outline"
-                onClick={() => toast.info("Coming soon")}
+                disabled title="iOS app coming soon"
                 className="flex items-center gap-2"
               >
                 <Smartphone className="w-4 h-4" />
-                iOS
+                iOS - soon
               </Button>
               <Button 
                 size="sm" 
@@ -119,8 +150,10 @@ export function Navbar() {
             <button
               type="button"
               aria-label={isMobileOpen ? "Close navigation menu" : "Open navigation menu"}
+              ref={toggleRef}
               aria-expanded={isMobileOpen}
-              className="md:hidden p-2 text-gray-600"
+              aria-controls="mobile-navigation"
+              className="xl:hidden p-2 text-gray-600"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
             >
               {isMobileOpen ? <X /> : <Menu />}
@@ -132,12 +165,15 @@ export function Navbar() {
       {/* Mobile Menu */}
       {isMobileOpen && (
         <motion.div
+          ref={menuRef}
+          id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Navigation menu"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="fixed inset-0 z-40 bg-white pt-24 px-6 md:hidden"
+          className="fixed inset-0 z-40 overflow-y-auto bg-white pt-24 pb-8 px-6 xl:hidden"
         >
           <div className="flex flex-col gap-6">
+            <button type="button" onClick={() => setIsMobileOpen(false)} className="self-end rounded-lg p-3 text-[#27255f]" aria-label="Close navigation menu"><X aria-hidden="true" /></button>
             {[
               { label: "Features", id: "features" },
               { label: "How it Works", id: "how-it-works" },
@@ -157,24 +193,22 @@ export function Navbar() {
               );
             })}
             <Link
-              href="/founders-club"
+              href="/founders-club" aria-current={pathname === "/founders-club" ? "page" : undefined}
               onClick={() => setIsMobileOpen(false)}
               className="text-xl sm:text-2xl font-bold text-[#27255f]"
             >
               Founder&apos;s Club
             </Link>
+            <Link href="/builders-club" aria-current={pathname === "/builders-club" ? "page" : undefined} onClick={() => setIsMobileOpen(false)} className="text-xl sm:text-2xl font-bold text-[#27255f]">Builders Club</Link>
             <div className="h-px bg-gray-100 my-4" />
             <Button 
               className="w-full" 
               size="lg"
               variant="outline"
-              onClick={() => {
-                setIsMobileOpen(false);
-                toast.info("Coming soon");
-              }}
+              disabled title="iOS app coming soon"
             >
               <Smartphone className="mr-2 w-5 h-5" />
-              iOS
+              iOS - coming soon
             </Button>
             <Button 
               className="w-full" 

@@ -44,8 +44,8 @@ export function unformatGhanaPhone(formatted: string): string {
     local = local.slice(1);
   }
   
-  // Take only the first 9 digits (Ghana mobile numbers are 9 digits)
-  local = local.slice(0, 9);
+  // Reject oversized numbers instead of registering a different, truncated number.
+  if (local.length > 9) return '';
   
   // Ensure we have exactly 9 digits
   if (local.length < 9) {

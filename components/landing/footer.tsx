@@ -93,6 +93,7 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-gray-900 mb-5 sm:mb-6 text-base sm:text-lg">Quick Links</h4>
             <ul className="space-y-3.5 sm:space-y-4">
+              <li><Link href="/builders-club" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors">Builders Club</Link></li>
               <li>
                 <Link href="/#features" className="text-sm sm:text-base text-gray-600 hover:text-[#27255f] transition-colors inline-flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#27255f]/30 group-hover:bg-[#27255f] transition-colors"></span>

@@ -194,7 +194,7 @@ export default function FoundersClubPage() {
     <main className="min-h-screen bg-white font-sans">
       <Navbar />
 
-      <section className="relative overflow-hidden bg-[#f8f8fb] px-6 pb-20 pt-36 sm:pt-44">
+      <section id="main-content" tabIndex={-1} className="relative overflow-hidden bg-[#f8f8fb] px-6 pb-20 pt-36 sm:pt-44">
         <div className="absolute -left-32 top-10 h-80 w-80 rounded-full bg-[#27255f]/10 blur-3xl" />
         <div className="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#ece825]/20 blur-3xl" />
         <div className="container relative z-10 mx-auto max-w-5xl text-center">

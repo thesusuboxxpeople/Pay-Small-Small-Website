@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, User, Mail, Phone, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { handleGhanaPhoneChange, unformatGhanaPhone } from "@/lib/phone";
 
-export function Waitlist() {
+export function Waitlist({ endpoint }: { endpoint?: string }) {
+  const submitting = useRef(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("+233 ");
@@ -21,7 +22,9 @@ export function Waitlist() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting.current) return;
     setError(null);
+    if (!endpoint) { setError("The waitlist is temporarily unavailable. Please contact support@paysmallsmall.app."); return; }
 
     if (!name.trim() || !phone.trim()) {
       setError("Please enter your full name and phone number.");
@@ -36,9 +39,13 @@ export function Waitlist() {
     }
 
     setStatus("loading");
+    submitting.current = true;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
 
     try {
-      const response = await fetch("https://admin.paysmallsmall.app/api/waitlist", {
+      const response = await fetch(endpoint, {
+        signal: controller.signal,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +60,7 @@ export function Waitlist() {
 
       const data = await response.json().catch(() => null);
 
-      if (response.ok) {
+      if (response.ok && data && typeof data === "object" && !Array.isArray(data) && data.success !== false) {
         setStatus("success");
         return;
       }
@@ -64,10 +71,8 @@ export function Waitlist() {
       if (errorType === "waitlist_duplicate_phone") {
         setError(apiMessage || "You are already on the waitlist with this phone number.");
       } else if (data?.data?.errors) {
-        const firstError =
-          Object.values<string[]>(data.data.errors as Record<string, string[]>)[0]?.[0] ??
-          apiMessage ??
-          "Something went wrong. Please check your details and try again.";
+        const firstError = Object.values(data.data.errors).flat().find((value): value is string => typeof value === "string")
+          ?? apiMessage ?? "Please check your details and try again.";
         setError(firstError);
       } else if (apiMessage) {
         setError(apiMessage);
@@ -75,10 +80,12 @@ export function Waitlist() {
         setError("Something went wrong while joining the waitlist. Please try again.");
       }
       setStatus("idle");
-    } catch (err) {
-      console.error("Failed to join waitlist", err);
-      setError("Network error. Please check your internet connection and try again.");
+    } catch {
+      setError("We could not confirm your waitlist registration. Check your connection and try again, or contact support@paysmallsmall.app.");
       setStatus("idle");
+    } finally {
+      window.clearTimeout(timeout);
+      submitting.current = false;
     }
   };
 
@@ -118,7 +125,7 @@ export function Waitlist() {
               Be the first to know when we launch
             </h2>
             <p className="text-base sm:text-lg text-gray-500 max-w-2xl mx-auto px-4 sm:px-0">
-              Join 2,000+ others on the waitlist. Get exclusive early access and special discounts when we go live.
+              Join the waitlist to receive launch updates and hear about early access.
             </p>
           </div>
 
@@ -145,7 +152,7 @@ export function Waitlist() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               {error && (
-                <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-2 text-sm text-red-600">
+                <div role="alert" className="rounded-lg bg-red-50 border border-red-200 px-4 py-2 text-sm text-red-600">
                   {error}
                 </div>
               )}
@@ -161,6 +168,9 @@ export function Waitlist() {
                   </div>
                   <input
                     id="name"
+                    autoComplete="name"
+                    maxLength={120}
+                    disabled={status === "loading"}
                     type="text"
                     placeholder="Enter your full name"
                     required
@@ -182,6 +192,9 @@ export function Waitlist() {
                   </div>
                   <input
                     id="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    disabled={status === "loading"}
                     type="tel"
                     placeholder="+233 (XXX) XXX-XXXX"
                     required
@@ -204,6 +217,9 @@ export function Waitlist() {
                   </div>
                   <input
                     id="email"
+                    autoComplete="email"
+                    maxLength={254}
+                    disabled={status === "loading"}
                     type="email"
                     placeholder="Enter your email address"
                     value={email}
@@ -226,7 +242,7 @@ export function Waitlist() {
               </Button>
 
               <p className="text-center text-sm text-gray-400 mt-4">
-                No spam, ever. Unsubscribe at any time.
+                We use your contact details to send Pay Small Small launch updates. Contact support@paysmallsmall.app to request removal.
               </p>
             </form>
           )}

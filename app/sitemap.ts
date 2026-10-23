@@ -5,6 +5,11 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
+      url: "https://paysmallsmall.app/builders-club/",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://paysmallsmall.app/",
       changeFrequency: "weekly",
       priority: 1,

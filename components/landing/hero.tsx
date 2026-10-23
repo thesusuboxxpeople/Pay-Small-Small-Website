@@ -3,12 +3,11 @@
 import { motion } from "framer-motion";
 import { Star, Shield, Users, Wallet, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { PLAY_STORE_URL } from "@/lib/links";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center pt-20 sm:pt-20 overflow-x-hidden bg-[#F9FAFB]">
+    <section id="main-content" tabIndex={-1} className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center pt-20 sm:pt-20 overflow-x-hidden bg-[#F9FAFB]">
       {/* Background Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#27255f]/20 rounded-full blur-3xl" />
@@ -80,11 +79,11 @@ export function Hero() {
                 <Button 
                   size="lg" 
                   variant="outline"
-                  onClick={() => toast.info("Coming soon")}
+                  disabled title="iOS app coming soon"
                   className="flex-1 sm:flex-none hover:scale-105 transition-transform flex items-center justify-center gap-2"
                 >
                   <Smartphone className="w-5 h-5" />
-                  iOS
+                  iOS - soon
                 </Button>
                 <Button 
                   size="lg" 
@@ -105,9 +104,9 @@ export function Hero() {
                 className="mt-8 md:mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 md:gap-8 border-t border-gray-200/60 pt-6 md:pt-8"
               >
                 {[
-                  { icon: Users, label: "10k+ Products" },
+                  { icon: Users, label: "Products & Services" },
                   { icon: Shield, label: "Secure Payments" },
-                  { icon: Star, label: "4.9/5 Rating" },
+                  { icon: Star, label: "Flexible Payments" },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -157,8 +156,8 @@ export function Hero() {
                    <Star className="w-4 h-4 sm:w-5 sm:h-5 text-[#ece825]" fill="currentColor" />
                  </div>
                  <div>
-                   <p className="font-bold text-gray-900 text-xs sm:text-sm">Top Rated</p>
-                   <p className="text-[10px] sm:text-xs text-gray-500">Trusted by thousands</p>
+                   <p className="font-bold text-gray-900 text-xs sm:text-sm">Shop & Discover</p>
+                   <p className="text-[10px] sm:text-xs text-gray-500">Products and services in one place</p>
                  </div>
               </motion.div>
 

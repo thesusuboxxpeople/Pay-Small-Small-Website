@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Wallet, Package, Calendar, CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PLAY_STORE_URL } from "@/lib/links";
 import { GlassCard } from "@/components/ui/glass-card";
 
 const benefits = [
@@ -206,9 +206,7 @@ export function PaySmallSmall() {
           </div>
 
           <div className="mt-8 text-center">
-            <Button size="lg" className="hover:scale-105 transition-transform">
-              Start Shopping
-            </Button>
+            <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-2xl bg-[#27255f] px-8 py-4 text-lg font-semibold text-white hover:bg-[#1f1d4a]">Start shopping on Android</a>
           </div>
         </motion.div>
       </div>

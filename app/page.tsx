@@ -5,6 +5,7 @@ import { Features } from "@/components/landing/features";
 import { PaySmallSmall } from "@/components/landing/pay-small-small";
 import { Waitlist } from "@/components/landing/waitlist";
 import { Footer } from "@/components/landing/footer";
+import { publicEndpoint } from "@/lib/site-config";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
       <HowItWorks />
       <Features />
       <PaySmallSmall />
-      <Waitlist />
+      <Waitlist endpoint={publicEndpoint(process.env.WAITLIST_ENDPOINT, "https://admin.paysmallsmall.app/api/waitlist")} />
       <Footer />
     </main>
   );

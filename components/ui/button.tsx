@@ -37,8 +37,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           sizes[size],
           className
         )}
-        disabled={isLoading || props.disabled}
         {...props}
+        disabled={isLoading || props.disabled}
+        aria-busy={isLoading || undefined}
       >
         {isLoading && (
           <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
