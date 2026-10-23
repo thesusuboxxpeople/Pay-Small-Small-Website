@@ -1,6 +1,6 @@
 # Release status — 23 October 2026
 
-Scope: the complete Pay Small Small public website (Home, Founder’s Club and Builders Club). Prepared for deployment to the existing Node/Forge hosting setup. Not deployed or pushed to Git by this preparation.
+Scope: the complete Pay Small Small public website (Home, Founder’s Club and Builders Club). Initially prepared locally for the existing Node/Forge hosting setup; the owner subsequently authorised the production rollout recorded below.
 
 ## Verified locally
 
@@ -15,6 +15,8 @@ Versions verified: Node 22.23.2, Next.js 16.4.3, Sharp 0.35.5 and PostCSS 8.5.31
 
 Owner-provided hosting checks: the production server reports Node 22.21.0 (compatible). PM2 `site-3002037` points to the active `current` release and serves Next.js on port 3001 in cluster mode. The owner reports saving the prepared Forge deployment script. The local source was synchronized with remote `main` at `94882b0` before preparing the release commit. None of these checks constitutes a live deployment of the new code.
 
+Deployment follow-up: commit `76780cf` was pushed to `main` with owner approval and passed GitHub CI. Live GET checks then confirmed the new Builders Club page and health endpoint. The original frame header conflicted with Forge's existing `SAMEORIGIN` header; the follow-up configuration matches that existing policy, and smoke tests reject conflicting rather than identical proxy-added values. Full production smoke verification must be rerun after this correction deploys.
+
 ## Release changes
 
 Added Builders Club content and application review/attachments; connected navigation and footer; separated public API configuration; added health and error/404 handling; improved keyboard menu behaviour, skip links and reduced motion; fixed an inactive shopping button and loading-button behaviour; marked iOS as coming soon; removed unsupported homepage counts/ratings; strengthened waitlist request handling; updated vulnerable packages; added CI, tests, a read-only smoke script, deployment/rollback instructions and portable source packaging.
@@ -25,6 +27,6 @@ Added Builders Club content and application review/attachments; connected naviga
 - Authorised real waitlist test and staff verification of receipt; no production form submissions or messages were sent.
 - Confirmation of public programme prices, delivery/maintenance commitments, partner responsibilities and applicant disclosures by the owner.
 - Builders Club backend, private document storage, staff review, retention/privacy information and end-to-end submission test before enabling the endpoint.
-- CI execution on Linux after pushing, followed by checks on the actual staging/production host. The workflow exists but has not been run remotely in this session.
+- GitHub CI passed on Linux for the first rollout. The header correction still needs its own CI run and the final production smoke check after activation.
 
 Deployable state: **public information website with Builders Club submission clearly closed**. Do not represent the document-submission service as live yet. See `deployment.md` for release steps and rollback.

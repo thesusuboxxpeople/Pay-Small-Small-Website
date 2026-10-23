@@ -3,6 +3,11 @@ import assert from "node:assert/strict";
 const origin = new URL(process.env.SMOKE_BASE_URL || "http://127.0.0.1:3000");
 const routes = ["/", "/founders-club", "/builders-club"];
 const pages = new Map();
+const checkHeader = (response, name, expected, route) => {
+  const values = response.headers.get(name)?.split(",").map(value => value.trim().toLowerCase());
+  assert.ok(values?.length, `${route}: missing ${name}`);
+  assert.ok(values.every(value => value === expected.toLowerCase()), `${route}: conflicting or unexpected ${name}: ${values.join(", ")}`);
+};
 const get = async path => {
   const url = new URL(path, origin);
   assert.equal(url.origin, origin.origin, "Smoke tests must not fetch external links");
@@ -11,8 +16,8 @@ const get = async path => {
 for (const route of routes) {
   const response = await get(route);
   assert.equal(response.status, 200, route);
-  assert.equal(response.headers.get("x-content-type-options"), "nosniff", route);
-  assert.equal(response.headers.get("x-frame-options"), "DENY", route);
+  checkHeader(response, "x-content-type-options", "nosniff", route);
+  checkHeader(response, "x-frame-options", "SAMEORIGIN", route);
   assert.equal(response.headers.get("x-powered-by"), null, route);
   const html = await response.text();
   assert.match(html, /Skip to content/);

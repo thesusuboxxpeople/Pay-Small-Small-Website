@@ -70,7 +70,7 @@ npm run start -- --hostname 127.0.0.1 --port 3000
 
 Run Nginx in front of Node with TLS. Preserve the existing site's proxy configuration and forward `Host`, `X-Forwarded-For` and `X-Forwarded-Proto`. Serve the application through Node; do not set the web root to `public/` and expect Next routes to work. Allow the service account to write Next image/cache files. Review Nginx body/time limits when a same-origin document upload proxy is eventually added (30 MiB of files plus multipart overhead); don't enable a document proxy now.
 
-Next.js emits `nosniff`, frame denial, referrer policy and browser-permission headers. TLS/HSTS and network access remain hosting responsibilities. Do not expose a development server publicly.
+Next.js emits `nosniff`, `X-Frame-Options: SAMEORIGIN`, referrer policy and browser-permission headers. The frame policy matches the existing Forge/Nginx policy: cross-origin framing is blocked, same-origin framing is permitted. The smoke check tolerates identical repeated header values from a proxy, but rejects conflicting values. TLS/HSTS and network access remain hosting responsibilities. Do not expose a development server publicly.
 
 After switching, run `SMOKE_BASE_URL=https://paysmallsmall.app npm run smoke` and inspect real service logs. Roll back by restoring the previous release/upstream and restarting its daemon if health or smoke checks fail. Re-run production checks after rollback.
 
