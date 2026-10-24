@@ -54,4 +54,4 @@ Submission is disabled without a configured endpoint. With a real backend, succe
 
 ## Current boundaries
 
-The repository contains no application storage, staff review backend, live-camera integration or payment collection. Founder's Club opens WhatsApp for the applicant to review and send; it does not confirm a message was sent. iOS is marked coming soon. The health route checks the website process, not external services. Production claims, privacy/retention arrangements and programme delivery responsibilities require owner confirmation.
+The repository contains no application storage, staff review backend, live-camera integration or payment collection. Founder's Club opens WhatsApp for the applicant to review and send; it does not confirm a message was sent. iOS and Android download links point to their respective app-store listings. The health route checks the website process, not external services. Production claims, privacy/retention arrangements and programme delivery responsibilities require owner confirmation.

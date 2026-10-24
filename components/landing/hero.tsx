@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Star, Shield, Users, Wallet, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PLAY_STORE_URL } from "@/lib/links";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/links";
 
 export function Hero() {
   return (
@@ -76,15 +76,16 @@ export function Hero() {
                 transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
               >
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  disabled title="iOS app coming soon"
-                  className="flex-1 sm:flex-none hover:scale-105 transition-transform flex items-center justify-center gap-2"
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download Pay Small Small for iOS (opens in a new tab)"
+                  className="inline-flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-[#27255f] px-8 text-lg font-semibold text-[#27255f] transition-colors hover:bg-[#27255f]/5 sm:flex-none"
                 >
                   <Smartphone className="w-5 h-5" />
-                  iOS - soon
-                </Button>
+                  iOS
+                </a>
                 <Button 
                   size="lg" 
                   variant="outline"

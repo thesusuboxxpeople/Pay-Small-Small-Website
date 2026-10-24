@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { BrandMark } from "@/components/ui/brand-mark";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { PLAY_STORE_URL } from "@/lib/links";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/links";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -126,15 +126,16 @@ export function Navbar() {
 
             {/* CTA */}
             <div className="hidden xl:flex items-center gap-3">
-              <Button 
-                size="sm" 
-                variant="outline"
-                disabled title="iOS app coming soon"
-                className="flex items-center gap-2"
+              <a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download Pay Small Small for iOS (opens in a new tab)"
+                className="inline-flex h-9 items-center justify-center gap-2 rounded-2xl border-2 border-[#27255f] px-4 text-sm font-semibold text-[#27255f] transition-colors hover:bg-[#27255f]/5"
               >
                 <Smartphone className="w-4 h-4" />
-                iOS - soon
-              </Button>
+                iOS
+              </a>
               <Button 
                 size="sm" 
                 variant="outline"
@@ -201,15 +202,17 @@ export function Navbar() {
             </Link>
             <Link href="/builders-club" aria-current={pathname === "/builders-club" ? "page" : undefined} onClick={() => setIsMobileOpen(false)} className="text-xl sm:text-2xl font-bold text-[#27255f]">Builders Club</Link>
             <div className="h-px bg-gray-100 my-4" />
-            <Button 
-              className="w-full" 
-              size="lg"
-              variant="outline"
-              disabled title="iOS app coming soon"
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileOpen(false)}
+              aria-label="Download Pay Small Small for iOS (opens in a new tab)"
+              className="inline-flex h-14 w-full items-center justify-center rounded-2xl border-2 border-[#27255f] px-8 text-lg font-semibold text-[#27255f] transition-colors hover:bg-[#27255f]/5"
             >
               <Smartphone className="mr-2 w-5 h-5" />
-              iOS - coming soon
-            </Button>
+              iOS
+            </a>
             <Button 
               className="w-full" 
               size="lg"

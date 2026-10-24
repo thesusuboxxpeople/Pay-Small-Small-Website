@@ -28,10 +28,22 @@ for (const route of routes) {
   pages.set(route, { html, ids: new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1])) });
 }
 const checkedAssets = new Set();
+const checkedDocuments = new Set();
 for (const [route, { html }] of pages) {
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)) {
     const url = new URL(match[1].replaceAll("&amp;", "&"), new URL(route, origin));
     if (url.origin !== origin.origin) continue;
+    if (url.pathname.endsWith(".pdf")) {
+      if (!checkedDocuments.has(url.pathname)) {
+        const response = await get(url.pathname);
+        assert.equal(response.status, 200, `PDF: ${url.pathname}`);
+        assert.match(response.headers.get("content-type") || "", /application\/pdf/i);
+        const bytes = new Uint8Array(await response.arrayBuffer());
+        assert.equal(new TextDecoder().decode(bytes.slice(0, 5)), "%PDF-");
+        checkedDocuments.add(url.pathname);
+      }
+      continue;
+    }
     const target = pages.get(url.pathname.replace(/\/$/, "") || "/");
     assert.ok(target, `Unexpected internal link: ${route} → ${url.pathname}`);
     if (url.hash) assert.ok(target.ids.has(decodeURIComponent(url.hash.slice(1))), `Missing anchor: ${route} → ${url.pathname}${url.hash}`);

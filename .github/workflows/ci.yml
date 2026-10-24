@@ -31,4 +31,4 @@ jobs:
             sleep 1
           done
           if [ "$ready" != 1 ]; then cat /tmp/paysmallsmall-server.log; exit 1; fi
-          EXPECT_BUILDERS_CLOSED=1 npm run smoke
+          npm run smoke
