@@ -1,6 +1,7 @@
  "use client";
  
  import Link from "next/link";
+ import Image from "next/image";
  import { Mail, Phone, MapPin } from "lucide-react";
  import { BrandMark } from "@/components/ui/brand-mark";
  
@@ -122,6 +123,21 @@ export function Footer() {
           </div>
         </div>
         
+        <div className="mb-8 flex flex-col items-center gap-2 rounded-2xl border border-gray-200 bg-white px-6 py-4 text-center sm:flex-row sm:justify-between sm:gap-8 sm:px-8 sm:text-left">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#27255f]">App sponsor</p>
+            <p className="mt-3 text-sm leading-relaxed text-gray-600">Pay Small Small is sponsored by Bidvest Microfinance Limited.</p>
+          </div>
+          <Image
+            src="/sponsors/bidvest-microfinance.png"
+            alt="Bidvest Microfinance Limited"
+            width={1350}
+            height={1080}
+            sizes="240px"
+            className="h-auto w-60 max-w-full shrink-0"
+          />
+        </div>
+
         {/* Bottom Bar */}
         <div className="border-t border-gray-200/60 pt-6 sm:pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
