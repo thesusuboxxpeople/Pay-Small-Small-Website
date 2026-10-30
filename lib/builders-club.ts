@@ -4,5 +4,5 @@ export const buildersModels = [
   { id: "four-bedroom", name: "Luxury Duplex", bedrooms: 4, monthly: 18000, image: "/builders-club/four-bedroom.png", features: ["4 en-suite bedrooms", "Double-volume living room", "Executive study", "Master suite with terrace and compound"] },
 ] as const;
 export const BUILDERS_TENOR = 48;
-export const BUILDERS_PHONE = "+233303978485";
+export const BUILDERS_PHONE = "+233249939025";
 export const formatGhs = (value: number) => `GHS ${value.toLocaleString("en-GH")}`;

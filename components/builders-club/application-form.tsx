@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Check, Paperclip } from "lucide-react";
 import { buildersModels, formatGhs } from "@/lib/builders-club";
 import { validateDetails, type BuildersApplication } from "@/lib/builders-application";
 
-const WHATSAPP_NUMBER = "233303978485";
+const WHATSAPP_NUMBER = "233249939025";
 const initial: BuildersApplication = {
   fullName: "", phone: "", email: "", residency: "", country: "",
   model: "", plotLocation: "", plotStatus: "", moveIn: "",
@@ -113,7 +113,7 @@ export function BuildersApplicationForm() {
       </li>)}
     </ol>
     <p className="mb-6 rounded-xl bg-[#f5f5fa] p-4 text-sm leading-relaxed text-gray-700">
-      Your application opens as a draft in WhatsApp to <strong>0303 978 485</strong>.
+      Your application opens as a draft in WhatsApp to <strong>024 993 9025</strong>.
       Attach your documents in that chat, then press Send. Nothing is submitted automatically.
     </p>
     <h3 ref={heading} tabIndex={-1} className="mb-6 text-2xl font-bold text-[#27255f]">

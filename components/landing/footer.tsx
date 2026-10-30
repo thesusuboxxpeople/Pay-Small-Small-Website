@@ -44,10 +44,10 @@ export function Footer() {
                   <Phone className="w-4 h-4 text-[#27255f]" />
                 </div>
                 <a
-                  href="tel:+233303978485"
+                  href="tel:+233249939025"
                   className="hover:text-[#27255f] transition-colors"
                 >
-                  +233303978485
+                  +233249939025
                 </a>
               </div>
               <div className="flex items-center gap-3 text-sm text-gray-600">
