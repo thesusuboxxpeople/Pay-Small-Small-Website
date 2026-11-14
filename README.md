@@ -1,8 +1,9 @@
 # Pay Small Small website
 
-One Next.js website with three public routes:
+Pay Small Small public website:
 
 - `/`: shopping information, Android download and waitlist.
+- `/download`: shared app download link. Opens the App Store on iOS/iPadOS and Google Play on Android; desktop visitors see both store buttons. `/download/index.html` is also available.
 - `/founders-club`: business app packages and WhatsApp enquiry/application handoff.
 - `/builders-club`: house models, programme information and application with document selection.
 

@@ -72,3 +72,13 @@ const builders = pages.get("/builders-club").html;
 assert.match(builders, /Builders Club application/);
 if (process.env.EXPECT_BUILDERS_CLOSED === "1") assert.match(builders, /Applications are not open for online submission yet/);
 console.log(`PASS health, sitemap, robots, 404 and application presence. ${checkedAssets.size} image URLs checked. No external requests or form submissions made.`);
+
+for (const route of ["/download", "/download/index.html"]) {
+  const response = await get(route);
+  assert.equal(response.status, 200, `Download page: ${route}`);
+  assert.match(response.headers.get("content-type") || "", /text\/html/i);
+  const html = await response.text();
+  assert.match(html, /https:\/\/apps\.apple\.com\/gh\/app\/pay-small-small-app\/id6783919355/);
+  assert.match(html, /https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.thesusuboxpeople\.paysmallsmall/);
+}
+console.log("Download pages passed");
